@@ -1,0 +1,54 @@
+require 'gtfs'
+source = GTFS::Source.build('./rail_data.zip')
+
+# need all stops and stop times
+  # specifically frank r lautenburg lower (stop_id: 38174, stop_code: 95167) and upper (stop_id: 38187, stop_code: 95168)
+  # secaucus stops on trips to/from pearl river AND penn station
+    # what is the LAST trip from penn station that arrives x minutes before train to pearl river?
+    # what are all times of trips (minimum transfer time: x minutes) between pearl river and penn
+
+  #  StopTime.joins(:trip).where('route_id = 13 AND direction_id = 1')
+#  StopTime.where("stop_id = 38174").joins(:trip).where('route_id = 13 AND direction_id = 1')
+# StopTime.where("stop_id = 38174").joins(:trip).where('route_id = 13 AND direction_id = 1').order(:departure_time)
+    # And where later stop is Pearl River
+    # Get departure time from Secaucus
+
+  Trip.where(trip_headsign: 'SPRING VALLEY')
+  Trip.where(route_id: 13)
+
+StopTime.joins(:trip).where('trip_headsign = ?', 'SPRING VALLEY')
+
+
+stop_times (43816)
+id    departure_time    stop_id   trip_id
+
+
+
+trips (3252)
+trip_id    route_id   direction   trip_headsign service_id
+
+stops (228 total stops)
+stop_id   stop_code   stop_name
+
+routes (16)
+route_id  route_name
+13        pascack valley
+
+calendar_dates()
+calendar_date_id  service_id   date
+
+trip_dates(join by service_id)
+JOIN table between trips and calendar_dates
+
+route has_many trips
+trip belongs_to route   (trip.route_id)
+trip has_many stop_times
+stop_time belongs_to trip   (stop_time.trip_id)
+stop has_many stop_times
+stop_time belongs_to stop (stop_time.stop_id)
+
+trip belongs_to service_id
+calendar_date belongs_to trip_date
+trip_date has_many trips
+trip_date has_many calendar_dates
+trip has_one? calendar_date through trip_dates
