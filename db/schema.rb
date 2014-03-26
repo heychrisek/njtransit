@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 20140325020142) do
 
   create_table "stop_times", force: true do |t|
     t.integer  "trip_id"
-    t.string   "arrival_time"
-    t.string   "departure_time"
+    t.float    "arrival_time"
+    t.float    "departure_time"
     t.integer  "stop_id"
     t.integer  "stop_sequence"
     t.integer  "pickup_type"
