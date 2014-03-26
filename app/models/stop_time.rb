@@ -10,8 +10,10 @@ class StopTime < ActiveRecord::Base
 
 
   def self.next_origin_departure(origin)
-    self.all_origin_departures.#order #(:departure_time - Time.now)
-    .where(departure_time between Time.now and two hours later)
+    self.all_origin_departures(origin)#.order #(:departure_time - Time.now)
+    # .where(departure_time between Time.now and two hours later)
+
+    self.all_origin_departures(origin).where(:departure_time: Time.now..Time.now + #1hour)
   end
 
 end
