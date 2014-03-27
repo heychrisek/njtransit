@@ -1,3 +1,22 @@
+Given:
+  Origin
+  Destination
+
+Determine:
+  Next departure
+  Arrival
+  Stops in between
+
+
+Steps (example: origin=Secaucus, dest=Pearl River)
+  Find route with Pearl River in it
+
+
+
+
+
+
+
 require 'gtfs'
 source = GTFS::Source.build('./rail_data.zip')
 

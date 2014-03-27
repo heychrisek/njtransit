@@ -11,7 +11,9 @@ source = GTFS::Source.build('./rail_data.zip')
 source.stop_times.each do |stop_time|
   StopTime.create(
     :trip_id => stop_time.trip_id,
+    :departure_time_string => stop_time.departure_time,
     :departure_time => stop_time.departure_time,
+    # :departure_time_as_date_time => stop_time.departure_time,
     :stop_id => stop_time.stop_id
     )
 end
@@ -38,6 +40,14 @@ source.stops.each do |stop|
     :stop_name => stop.name,
     )
 end
+
+i = 1
+source.stops.each do |stop|
+  stopx = Stop.find(i)
+  stopx.update(old_stop_id: stop.id)
+  i+=1
+end
+    
 
 source.routes.each do |route|
   Route.create(

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140325020142) do
+ActiveRecord::Schema.define(version: 20140326235438) do
 
   create_table "calendar_dates", force: true do |t|
     t.integer  "service_id"
@@ -45,13 +45,11 @@ ActiveRecord::Schema.define(version: 20140325020142) do
 
   create_table "stop_times", force: true do |t|
     t.integer  "trip_id"
-    t.float    "arrival_time"
-    t.float    "departure_time"
+    t.string   "departure_time_string"
+    t.time     "departure_time"
     t.integer  "stop_id"
     t.integer  "stop_sequence"
     t.integer  "pickup_type"
-    t.integer  "drop_off_type"
-    t.float    "shape_dist_traveled"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -64,6 +62,7 @@ ActiveRecord::Schema.define(version: 20140325020142) do
     t.integer  "zone_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "old_stop_id"
   end
 
   create_table "trips", force: true do |t|
