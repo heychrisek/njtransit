@@ -8,6 +8,9 @@ class Stop < ActiveRecord::Base
     # where("stop_name = ?", stop_name)
   end
 
+  def self.find_route_id_by_destination(destination)
+    joins(:trips).where("stop_name = ?", destination).pluck(:route_id).first
+  end
 
-
+  
 end

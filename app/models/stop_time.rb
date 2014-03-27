@@ -10,7 +10,9 @@ class StopTime < ActiveRecord::Base
     # how does stop_id 38174 work? stop_id is 189   -   because stop_id is a table in stop_times...
   end
 
-
+  def self.find_headsign(origin, destination)
+    
+  end
 
   def self.next_departure_from_to(departure, headsign)
     # gets departure time of next Secaucus - Pearl River train
